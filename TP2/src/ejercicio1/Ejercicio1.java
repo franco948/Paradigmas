@@ -2,27 +2,31 @@ package ejercicio1;
 
 public class Ejercicio1 {
 
-    public int[] devolverDosMasAltos(int[] array) {
-        if(array.length == 0) return new int[0];
-        if(array.length == 1) return new int[] {array[0]};
+    public int devolverNumeroConMayorCantidadDePares(int[] array) {
+        if (array.length == 0) return -1;
 
-        int n = array.length;
-        int mayor = array[0];
-        int segundoMayor = array[0];
+        int cantidadMasGrande = 0;
+        int numeroConMayorCantidad = -1;
 
-        for (int i = 1; i < n; i++) {
+        for(int i = 0; i < array.length; i++) {
+            int aux = Math.abs(array[i]);
+            int cantidad = 0;
 
-            if (array[i] > segundoMayor){
-                segundoMayor = array[i];
+            while (aux % 10 != 0 || aux / 10 != 0) {
+
+                if (aux % 2 == 0) {
+                    cantidad++;
+                }
+
+                aux /= 10;
             }
 
-            if(segundoMayor > mayor) {
-                int aux = mayor;
-                mayor = segundoMayor;
-                segundoMayor = aux;
+            if (cantidad > cantidadMasGrande){
+                cantidadMasGrande = cantidad;
+                numeroConMayorCantidad = array[i];
             }
         }
 
-        return new int[] {mayor, segundoMayor};
+        return numeroConMayorCantidad;
     }
 }

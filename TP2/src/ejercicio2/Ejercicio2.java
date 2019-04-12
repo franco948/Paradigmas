@@ -1,32 +1,58 @@
 package ejercicio2;
 
+import java.util.Scanner;
+import java.lang.Math;
+
 public class Ejercicio2 {
 
-    public int devolverNumeroConMayorCantidadDePares(int[] array) {
-        if (array.length == 0) return -1;
+    public static void main(String[] args) {
 
-        int cantidadMasGrande = 0;
-        int numeroConMayorCantidad = -1;
+        String piedra = "PIEDRA";
+        String papel = "PAPEL";
+        String tijera = "TIJERA";
 
-        for(int i = 0; i < array.length; i++) {
-            int aux = Math.abs(array[i]);
-            int cantidad = 0;
+        while (true){
+            Scanner scanner = new Scanner(System.in);
 
-            while (aux % 10 != 0 || aux / 10 != 0) {
+            System.out.print("Ingrese PIEDRA, PAPEL o TIJERA: ");
+            String input = scanner.nextLine().toUpperCase();
 
-                if (aux % 2 == 0) {
-                    cantidad++;
+            if (input.equals(piedra) || input.equals(tijera) || input.equals(papel)) {
+
+                String resultado = "";
+
+                switch (generarRandom()) {
+                    case 0:
+                        resultado = papel;
+                        break;
+                    case 1:
+                        resultado = piedra;
+                        break;
+                    case 2:
+                        resultado = tijera;
+                        break;
                 }
 
-                aux /= 10;
-            }
 
-            if (cantidad > cantidadMasGrande){
-                cantidadMasGrande = cantidad;
-                numeroConMayorCantidad = array[i];
+                System.out.println();
+                System.out.println("Su entrada: " + input);
+                System.out.println("La maquina: " + resultado);
+
+                System.out.println();
+                System.out.println("Presione ENTER para seguir jugando.");
+                scanner.nextLine();
+            }
+            else {
+                System.out.println();
+                System.out.println("La entrada es incorrecta. Vuelva a intentarlo.\n");
+                System.out.println("Presione ENTER para seguir jugando.");
+
+                scanner.nextLine();
             }
         }
+    }
 
-        return numeroConMayorCantidad;
+    public static int generarRandom() {
+        return ((int)(Math.random() * 100)) % 3;
     }
 }
