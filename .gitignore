@@ -112,3 +112,5 @@ hs_err_pid*
 # End of https://www.gitignore.io/api/java,intellij
 TP2/primos.txt
 TP2/primosTest.txt
+TP2/divisores_de_3000.txt
+TP2/divisores_de_3000_test.txt

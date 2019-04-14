@@ -13,16 +13,24 @@ public class Ejercicio4 {
     public static void guardarEnArchivo(int[] numeros) throws IOException {
 
         FileWriter primosWriter = new FileWriter("primos.txt");
+        FileWriter divisores3MilWriter = new FileWriter("divisores_de_3000.txt");
 
         for(int i = 0; i < numeros.length; i++) {
 
             if(esPrimo(numeros[i])) {
                 primosWriter.write(numeros[i] + System.lineSeparator());
             }
+
+            if(3000 % numeros[i] == 0) {
+                divisores3MilWriter.write(numeros[i] + System.lineSeparator());
+            }
         }
 
         primosWriter.flush();
         primosWriter.close();
+
+        divisores3MilWriter.flush();
+        divisores3MilWriter.close();
     }
 
     public static boolean esPrimo(int numero) {

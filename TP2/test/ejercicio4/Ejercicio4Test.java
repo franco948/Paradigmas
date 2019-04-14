@@ -139,4 +139,45 @@ public class Ejercicio4Test {
         // verifica que se hayan leido todas las lineas
         Assert.assertEquals(expectedNumbers.length, i);
     }
+
+    @Test
+    public void guardarEnArchivo_DivisoresDe3Mil_Ok() throws IOException {
+        // Arrange
+        String path = "divisores_de_3000_test.txt";
+
+        FileWriter fileWriter = new FileWriter(path);
+
+        String output = 1 + System.lineSeparator() +
+                2 + System.lineSeparator() +
+                3 + System.lineSeparator() +
+                4 + System.lineSeparator() +
+                5 + System.lineSeparator() +
+                6 + System.lineSeparator() +
+                8 + System.lineSeparator();
+
+        fileWriter.write(output);
+
+        fileWriter.flush();
+        fileWriter.close();
+
+        // Act
+        Ejercicio4.guardarEnArchivo(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13});
+
+        // Assert
+        int i = 0;
+        String[] expectedNumbers = new String[] {"1", "2", "3", "4", "5", "6", "8"};
+
+        Scanner scanner = new Scanner(new File(path));
+
+        while (scanner.hasNextLine()) {
+
+            String line = scanner.nextLine();
+
+            // process the line
+            Assert.assertEquals(expectedNumbers[i++], line);
+        }
+
+        // verifica que se hayan leido todas las lineas
+        Assert.assertEquals(expectedNumbers.length, i);
+    }
 }
