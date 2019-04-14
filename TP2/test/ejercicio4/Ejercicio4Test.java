@@ -192,7 +192,7 @@ public class Ejercicio4Test {
 
         String output = 5 + System.lineSeparator() +
                         5 + System.lineSeparator();
-        
+
         fileWriter.write(output);
 
         fileWriter.flush();
