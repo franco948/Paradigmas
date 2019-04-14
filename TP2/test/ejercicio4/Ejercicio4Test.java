@@ -124,6 +124,7 @@ public class Ejercicio4Test {
 
         // Assert
         int i = 0;
+
         String[] expectedNumbers = new String[] {"1", "2", "3", "5", "7"};
 
         Scanner scanner = new Scanner(new File(path));
@@ -165,7 +166,45 @@ public class Ejercicio4Test {
 
         // Assert
         int i = 0;
+
         String[] expectedNumbers = new String[] {"1", "2", "3", "4", "5", "6", "8"};
+
+        Scanner scanner = new Scanner(new File(path));
+
+        while (scanner.hasNextLine()) {
+
+            String line = scanner.nextLine();
+
+            // process the line
+            Assert.assertEquals(expectedNumbers[i++], line);
+        }
+
+        // verifica que se hayan leido todas las lineas
+        Assert.assertEquals(expectedNumbers.length, i);
+    }
+
+    @Test
+    public void guardarEnArchivo_PromedioDeImparesYPares_Ok() throws IOException {
+        // Arrange
+        String path = "promedios_test.txt";
+
+        FileWriter fileWriter = new FileWriter(path);
+
+        String output = 5 + System.lineSeparator() +
+                        5 + System.lineSeparator();
+        
+        fileWriter.write(output);
+
+        fileWriter.flush();
+        fileWriter.close();
+
+        // Act
+        Ejercicio4.guardarEnArchivo(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9});
+
+        // Assert
+        int i = 0;
+
+        String[] expectedNumbers = new String[] {"5", "5"};
 
         Scanner scanner = new Scanner(new File(path));
 

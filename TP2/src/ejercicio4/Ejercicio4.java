@@ -12,25 +12,44 @@ public class Ejercicio4 {
      */
     public static void guardarEnArchivo(int[] numeros) throws IOException {
 
+        int sumaDePares = 0, cantidadPares = 0;
+        int sumaDeImpares = 0, cantidadImpares = 0;
+
         FileWriter primosWriter = new FileWriter("primos.txt");
         FileWriter divisores3MilWriter = new FileWriter("divisores_de_3000.txt");
+        FileWriter promediosWriter = new FileWriter("promedios.txt");
 
         for(int i = 0; i < numeros.length; i++) {
 
-            if(esPrimo(numeros[i])) {
+            if (esPrimo(numeros[i])) {
                 primosWriter.write(numeros[i] + System.lineSeparator());
             }
 
-            if(3000 % numeros[i] == 0) {
+            if (3000 % numeros[i] == 0) {
                 divisores3MilWriter.write(numeros[i] + System.lineSeparator());
             }
+
+            if (numeros[i] % 2 == 0) {
+                sumaDePares += numeros[i];
+                cantidadPares++;
+            }
+            else {
+                sumaDeImpares += numeros[i];
+                cantidadImpares++;
+            }
         }
+
+        promediosWriter.write((sumaDePares / cantidadPares)  + System.lineSeparator());
+        promediosWriter.write((sumaDeImpares / cantidadImpares)  + System.lineSeparator());
 
         primosWriter.flush();
         primosWriter.close();
 
         divisores3MilWriter.flush();
         divisores3MilWriter.close();
+
+        promediosWriter.flush();
+        promediosWriter.close();
     }
 
     public static boolean esPrimo(int numero) {
