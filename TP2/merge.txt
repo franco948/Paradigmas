@@ -1,0 +1,2 @@
+1234,public void hola(),public void hi()
+1235,public int calcular(),public double calcular()
