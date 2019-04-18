@@ -3,10 +3,12 @@ package ejercicio5;
 import java.util.Stack;
 
 public class Ejercicio5 {
-    /*
+
     public static boolean estaBalanceada(String expresion) {
 
-        Stack<String> parentesis = new Stack<String>();
+        if (expresion == "") return true;
+
+        Stack<String> pila = new Stack<String>();
 
         String[] caracteres = expresion.split("");
 
@@ -14,7 +16,42 @@ public class Ejercicio5 {
 
             String caracter = caracteres[i];
 
+            switch (caracter) {
+                case "(":
+                    pila.push("(");
+                    break;
+                case "[":
+                    pila.push("[");
+                    break;
+                case "{":
+                    pila.push("{");
+                    break;
+            }
 
+            if (caracter.equals(")") || caracter.equals("]") || caracter.equals("}")) {
+
+                if (pila.empty()) return false;
+
+                switch (caracter) {
+                    case ")":
+                        caracter = "(";
+                        break;
+                    case "]":
+                        caracter = "[";
+                        break;
+                    case "}":
+                        caracter = "{";
+                        break;
+                }
+
+                String top = pila.pop();
+
+                if (!top.equals(caracter)) {
+                    return false;
+                }
+            }
         }
-    }*/
+
+        return true;
+    }
 }
