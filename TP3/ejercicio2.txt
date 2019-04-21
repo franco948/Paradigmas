@@ -1,0 +1,5 @@
+padre(Kevin,Mario)
+madre(Kevin,Liliana)
+padre(Agustin,Mario)
+padre(Lautaro,Augusto)
+madre(Julieta,Mariana)

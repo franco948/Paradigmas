@@ -1,0 +1,6 @@
+padre(Kevin,Mario)
+padre(Hernan,Mario)
+madre(Kevin,Elena)
+madre(Hernan,Elena)
+padre(Mario,Luis)
+padre(Nicolas,Pedro)
