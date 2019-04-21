@@ -91,7 +91,7 @@ public class Ejercicio2Test {
         Ejercicio2.getPadres().put(padre, abuelo);
 
         // ACT
-        boolean resultado = Ejercicio2.esAbuelo(abuelo, nieto);
+        boolean resultado = Ejercicio2.esAbuelo(nieto, abuelo);
 
         // ASSERT
         Assert.assertTrue(resultado);
@@ -108,7 +108,7 @@ public class Ejercicio2Test {
         Ejercicio2.getPadres().put(madre, abuelo);
 
         // ACT
-        boolean resultado = Ejercicio2.esAbuelo(abuelo, nieto);
+        boolean resultado = Ejercicio2.esAbuelo(nieto, abuelo);
 
         // ASSERT
         Assert.assertTrue(resultado);
@@ -125,7 +125,7 @@ public class Ejercicio2Test {
         //Ejercicio2.getPadres().put(madre, abuelo);
 
         // ACT
-        boolean resultado = Ejercicio2.esAbuelo(abuelo, nieto);
+        boolean resultado = Ejercicio2.esAbuelo(nieto, abuelo);
 
         // ASSERT
         Assert.assertFalse(resultado);
