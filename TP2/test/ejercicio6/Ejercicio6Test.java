@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -53,6 +56,29 @@ public class Ejercicio6Test {
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void cargar() throws IOException {
+        // ARRANGE
+        Map<String, String> expected = new HashMap<>();
+        expected.put("4123","asd");
+        expected.put("1235","public double calcular()");
+        expected.put("4132","nada");
+        expected.put("1234","public void hi()");
+        expected.put("4139","jajaja");
+
+        // ACT
+        Map<String, String> resultado = Ejercicio6.cargar("archivo2.txt");
+
+        // ASSERT
+        Assert.assertEquals(expected.size(), resultado.size());
+
+        Set<String> keys = expected.keySet();
+
+        for (String key : keys) {
+            Assert.assertEquals(expected.get(key), resultado.get(key));
         }
     }
 }
