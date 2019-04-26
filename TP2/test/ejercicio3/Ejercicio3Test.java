@@ -9,11 +9,12 @@ public class Ejercicio3Test {
 
     @Test
     public void encontrarCuatroDigitos() {
-
         // ACT
         int resultado = Ejercicio3.encontrarCuatroDigitos();
 
         // ASSERT
         System.out.println(resultado);
+
+        Assert.assertEquals(2592, resultado);
     }
 }
