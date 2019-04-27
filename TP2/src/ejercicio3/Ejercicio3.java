@@ -2,6 +2,15 @@ package ejercicio3;
 
 public class Ejercicio3 {
 
+    public static int encontrarCuatrosDigitosSinForAnidado() {
+
+        int resultado = 0;
+
+
+
+        return resultado;
+    }
+
     public static int encontrarCuatroDigitos() {
 
         for (int X = 0; X <= 9; X++){

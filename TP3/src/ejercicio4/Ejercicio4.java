@@ -20,6 +20,10 @@ public class Ejercicio4 {
 
     }
 
+    public static String elegirPalabra(List<String> palabras) {
+        return palabras.get(generarRandom(0, palabras.size() - 1));
+    }
+
     public static List<String> leerPalabras(String path) throws FileNotFoundException, IOException {
 
         List<String> palabras = new ArrayList<>();
@@ -30,7 +34,8 @@ public class Ejercicio4 {
 
         while (line != null) {
 
-            if ( Ejercicio2.match("[a-z\\sA-Z]+", line) ){
+            //if ( Ejercicio2.match("[a-z\\sA-Z]+", line) ){
+            if ( Ejercicio2.match("[a-zA-Z]+", line) ){
                 palabras.add(line);
             }
 
@@ -40,5 +45,13 @@ public class Ejercicio4 {
         reader.close();
 
         return palabras;
+    }
+
+    public static int generarRandom(int lowerBound, int upperBound) {
+        int resultado = 0;
+
+        resultado = (int)( Math.random() * (upperBound - lowerBound) + lowerBound );
+
+        return resultado;
     }
 }

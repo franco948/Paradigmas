@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Ejercicio4Test {
@@ -21,13 +25,14 @@ public class Ejercicio4Test {
     @Test
     public void match() {
         // ARRANGE
-        String pattern = "[a-z\\sA-Z]+";
+        //String pattern = "[a-z\\sA-Z]+";
+        String pattern = "[a-zA-Z]+";
 
         String[] lines = new String[] {
                 "vaca",
                 "pinocho",
-                "faro",
-                "el zorro"
+                "faro"
+                //"el zorro"
         };
 
         // ACT - ASSERT
@@ -35,5 +40,42 @@ public class Ejercicio4Test {
 
             Assert.assertTrue(Ejercicio2.match(pattern, lines[i]));
         }
+    }
+
+    @Test
+    public void leerPalabras() throws IOException {
+        // ARRANGE
+        String path = "ejercicio4.txt";
+
+        List<String> expected = new LinkedList<>();
+        expected.add("oveja");
+        expected.add("abeja");
+        expected.add("vaca");
+        expected.add("martillo");
+
+        // ACT
+        List<String> resultado = Ejercicio4.leerPalabras(path);
+
+        // ASSERT
+        Assert.assertEquals(expected.size(), resultado.size());
+
+        for (int i = 0; i < expected.size(); i++) {
+            Assert.assertEquals(expected.get(i), resultado.get(i));
+        }
+    }
+
+    @Test
+    public void elegirPalabra() {
+        // ARRANGE
+        List<String> expected = new LinkedList<>();
+        expected.add("oveja");
+        expected.add("abeja");
+        expected.add("vaca");
+        expected.add("martillo");
+
+        // ACT
+        String resutado = Ejercicio4.elegirPalabra("")
+
+        // ASSERT
     }
 }
