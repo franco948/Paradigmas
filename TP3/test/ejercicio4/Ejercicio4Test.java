@@ -74,8 +74,33 @@ public class Ejercicio4Test {
         expected.add("martillo");
 
         // ACT
-        String resutado = Ejercicio4.elegirPalabra("")
+        String resutado = Ejercicio4.elegirPalabra(expected);
 
         // ASSERT
+        System.out.println(resutado);
+
+        Assert.assertTrue(!resutado.isBlank() && !resutado.isEmpty());
+
+        Assert.assertTrue(expected.contains(resutado));
     }
+/*
+    @Test(expected = IllegalStateException.class)
+    public void arriesgar_InputEnBlanco_LanzaError() {
+        // ARRANGE
+        String input = "   ";
+        String palabra = "oveja";
+
+        // ACT
+        Ejercicio4.arriesgar(input, palabra);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void arriesgar_InputEnNull_LanzaError() {
+        // ARRANGE
+        String input = null;
+        String palabra = "oveja";
+
+        // ACT
+        Ejercicio4.arriesgar(input, palabra);
+    }*/
 }
