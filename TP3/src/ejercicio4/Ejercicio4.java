@@ -20,7 +20,8 @@ public class Ejercicio4 {
 
         intentos = 0;
 
-        List<String> palabras = leerPalabras("F:\\dev\\Paradigmas\\TP3\\ahorcado.txt");
+        //List<String> palabras = leerPalabras("F:\\dev\\Paradigmas\\TP3\\ahorcado.txt");
+        List<String> palabras = leerPalabras("TP3\\ahorcado.txt");
 
         String palabraElegida = elegirPalabra(palabras);
 
