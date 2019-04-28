@@ -16,7 +16,14 @@ public class Verificadora {
         return m.matches();
     }
 
-    public static boolean validarFecha() {
-        return false;
+    public static boolean validarFecha(String fecha) {
+
+        String pattern = "^(0?[1-9]|[12][0-9]|3[01])[\\/]([1-9]|(1[012]))[\\/]\\d{4}$";
+                //"([0-2]?[0-9])|30\\/[0-9]|(1[0-2])\\/[0-9]{4}";
+
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(fecha);
+
+        return m.matches();
     }
 }
