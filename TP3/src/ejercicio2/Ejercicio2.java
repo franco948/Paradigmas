@@ -17,7 +17,8 @@ public class Ejercicio2 {
     public static void main(String[] args) {
 
         try {
-            cargar("F:\\dev\\Paradigmas\\TP3\\ejercicio2_test2.txt");
+            //cargar("F:\\dev\\Paradigmas\\TP3\\ejercicio2_test2.txt");
+            cargar("TP3\\ejercicio2_test2.txt");
         }
         catch (IOException ex) {
             System.out.println(ex.getMessage());
