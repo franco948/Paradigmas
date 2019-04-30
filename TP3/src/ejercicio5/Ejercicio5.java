@@ -52,6 +52,6 @@ public class Ejercicio5 {
             }
         }
 
-        return true;
+        return pila.isEmpty();
     }
 }

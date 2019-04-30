@@ -22,6 +22,7 @@ public class Ejercicio5Test {
     @Test
     public void estaBalanceada_conExpresionInvalida_devuelveFalse() {
 
+        String exp10 = "{{}";
         // ARRANGE
         String exp1 = "{ ( ( ) }";
         String exp2 = "  ()()() } ";
@@ -30,9 +31,11 @@ public class Ejercicio5Test {
         boolean r1 = Ejercicio5.estaBalanceada(exp1);
         boolean r2 = Ejercicio5.estaBalanceada(exp2);
 
+        boolean r3 = Ejercicio5.estaBalanceada(exp10);
         // ASSERT
         Assert.assertFalse(r1);
         Assert.assertFalse(r2);
+        Assert.assertFalse(r3);
     }
 
     @Test

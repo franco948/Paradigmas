@@ -53,6 +53,7 @@ public class Conexion {
         try {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
+                    // TODO: probar con i en vez de i + 1
                     set(statement, i + 1, params[i]);
                 }
             }

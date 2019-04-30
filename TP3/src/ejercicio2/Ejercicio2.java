@@ -87,6 +87,9 @@ public class Ejercicio2 {
 
                 madres.put(nombres[0], nombres[1]);
             }
+            else {
+                throw new IllegalStateException();
+            }
 
             line = reader.readLine();
         }

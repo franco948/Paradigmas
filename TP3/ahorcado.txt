@@ -1,5 +1,5 @@
 vaca
-obeja
+oveja
 abeja
 tigre
 leon
