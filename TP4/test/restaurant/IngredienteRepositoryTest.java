@@ -4,7 +4,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import util.ScriptReader;
 
+import java.io.FileReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class IngredienteRepositoryTest {
-
+/*
     @Before
     public void setUp() throws Exception {
         String sql =
@@ -32,6 +34,15 @@ public class IngredienteRepositoryTest {
                 "INSERT INTO Ingrediente (ing_nombre, ing_tipo) VALUES ('Cebolla', 'Verdura');";
 
         Conexion.write(sql);
+    }
+*/
+
+    @Before
+    public void setUp() throws Exception {
+        ScriptReader reader = new ScriptReader("ingrediente.sql");
+        String statement = reader.readStatement();
+        reader.close();
+        Conexion.write(statement);
     }
 
     @After

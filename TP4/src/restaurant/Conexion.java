@@ -39,7 +39,6 @@ public class Conexion {
         }
     }
 
-
     public static void write(String sql, Object[] params)  throws ClassNotFoundException, SQLException {
         cargarDriver();
 
@@ -53,12 +52,12 @@ public class Conexion {
         try {
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
-                    // TODO: probar con i en vez de i + 1
+                    // TODO: probar con i en vez de i + 1, DA ERROR usando i, no acepta indice 0
                     set(statement, i + 1, params[i]);
                 }
             }
 
-            statement.executeUpdate(sql);
+            statement.executeUpdate();
         }
         catch (SQLException ex)  {
             throw ex;
