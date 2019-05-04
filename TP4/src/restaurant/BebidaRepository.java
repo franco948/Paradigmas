@@ -1,27 +1,31 @@
 package restaurant;
 
+import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.map.MultiValueMap;
+
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BebidaRepository {
 
-    public static void altaBebida(String nombre, float precio) throws ClassNotFoundException, SQLException {
 
-        String sql = "INSERT INTO Bebida (beb_nombre, beb_precio) VALUES (?, ?) ";
+    public static void altaBebida(String nombre, int tamaño, float precio) throws ClassNotFoundException, SQLException {
 
-        Object[] params = new Object[] { nombre, precio };
+        String sql = "INSERT INTO Bebida (beb_nombre, beb_tamaño, beb_precio) VALUES (?, ?, ?) ";
+
+        Object[] params = new Object[] { nombre, tamaño, precio };
 
         Conexion.write(sql, params);
 
         //throw new UnsupportedOperationException();
     }
 
-    public static void modificarBebida(String nombreViejo, String nombreNuevo, float precio) throws ClassNotFoundException, SQLException {
+    public static void modificarBebida(String nombreViejo, String nombreNuevo, int tamaño, float precio) throws ClassNotFoundException, SQLException {
 
-        String sql = "UPDATE Bebida SET beb_nombre = ?, beb_precio = ? WHERE beb_nombre = ? ";
+        String sql = "UPDATE Bebida SET beb_nombre = ?, beb_tamaño = ?, beb_precio = ? WHERE beb_nombre = ? ";
 
-        Object[] params = new Object[] { nombreNuevo, precio, nombreViejo };
+        Object[] params = new Object[] { nombreNuevo, tamaño, precio, nombreViejo };
 
         Conexion.write(sql, params);
 
@@ -39,9 +43,9 @@ public class BebidaRepository {
         //throw new UnsupportedOperationException();
     }
 
-    public static Map<String, Float> devolverBebidas() throws ClassNotFoundException, SQLException {
+    public static List<String> devolverBebidas() throws ClassNotFoundException, SQLException {
 
-        Map<String, Float> bebidas = new HashMap<>();
+        List<String> bebidas = new LinkedList<>();
 
         String sql = "SELECT * FROM Bebida";
 
@@ -54,7 +58,8 @@ public class BebidaRepository {
         ResultSet resultSet = statement.executeQuery(sql);
 
         while ( resultSet.next() ) {
-            bebidas.put( resultSet.getString(1), resultSet.getFloat(2) );
+
+            bebidas.add( resultSet.getString(1) );
         }
 
         resultSet.close();

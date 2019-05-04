@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
 
 public class BebidaRepositoryTest {
 
-    private final String STELLA_LITRO = "Cerveza Stella de litro";
-    private final String STELLA_PORRON = "Porron de Cerveza Stella";
-    private final String COCA_COLA = "Coca cola de 600 cm3";
+    private final String STELLA_LITRO = "Cerveza Stella";
+    private final String STELLA_PORRON = "Porron Cerveza Stella";
+    private final String COCA_COLA = "Coca cola";
     private final String AGUA_SIN_GAS = "Agua sin gas";
 
     @Before
@@ -37,19 +37,19 @@ public class BebidaRepositoryTest {
     public void altaBebida() throws ClassNotFoundException, SQLException {
         // ARRANGE
         String bebida = "PEPSI";
+        int tam = 1500;
         Float precio = 25.0f;
 
         int expectedSize = 5;
 
         // ACT
-        BebidaRepository.altaBebida(bebida, precio);
-        Map<String, Float> bebidas = BebidaRepository.devolverBebidas();
+        BebidaRepository.altaBebida(bebida, tam, precio);
+        List<String> bebidas = BebidaRepository.devolverBebidas();
 
         // ASSERT
         Assert.assertEquals( expectedSize, bebidas.size() );
 
-        Assert.assertTrue( bebidas.containsKey(bebida) );
-        Assert.assertEquals( precio, bebidas.get(bebida),0);
+        Assert.assertTrue( bebidas.contains(bebida) );
     }
 
     @Test
@@ -57,20 +57,20 @@ public class BebidaRepositoryTest {
         // ARRANGE
         String nombreViejo = COCA_COLA;
         String nombreNuevo = "SEVEN UP";
+        int tam = 750;
         Float precio = 95.0f;
 
         int expectedSize = 4;
 
         // ACT
-        BebidaRepository.modificarBebida(nombreViejo, nombreNuevo, precio);
-        Map<String, Float> bebidas = BebidaRepository.devolverBebidas();
+        BebidaRepository.modificarBebida(nombreViejo, nombreNuevo, tam, precio);
+        List<String> bebidas = BebidaRepository.devolverBebidas();
 
         // ASSERT
         Assert.assertEquals( expectedSize, bebidas.size() );
 
-        Assert.assertTrue( bebidas.containsKey(nombreNuevo) );
-        Assert.assertFalse( bebidas.containsKey(nombreViejo) );
-        Assert.assertEquals(precio, bebidas.get(nombreNuevo), 0);
+        Assert.assertTrue( bebidas.contains(nombreNuevo) );
+        Assert.assertFalse( bebidas.contains(nombreViejo) );
     }
 
     @Test
@@ -81,12 +81,12 @@ public class BebidaRepositoryTest {
 
         // ACT
         BebidaRepository.borrarBebida(bebida);
-        Map<String, Float> bebidas = BebidaRepository.devolverBebidas();
+        List<String> bebidas = BebidaRepository.devolverBebidas();
 
         // ASSERT
         Assert.assertEquals( expectedSize, bebidas.size() );
 
-        Assert.assertFalse( bebidas.containsKey(bebida) );
+        Assert.assertFalse( bebidas.contains(bebida) );
     }
 
     @Test
@@ -95,19 +95,14 @@ public class BebidaRepositoryTest {
         int expectedSize = 4;
 
         // ACT
-        Map<String, Float> bebidas = BebidaRepository.devolverBebidas();
+        List<String> bebidas = BebidaRepository.devolverBebidas();
 
         // ASSERT
         Assert.assertEquals(expectedSize, bebidas.size() );
 
-        Assert.assertTrue( bebidas.containsKey(STELLA_LITRO) );
-        Assert.assertTrue( bebidas.containsKey(STELLA_PORRON) );
-        Assert.assertTrue( bebidas.containsKey(COCA_COLA) );
-        Assert.assertTrue( bebidas.containsKey(AGUA_SIN_GAS) );
-
-        Assert.assertEquals( bebidas.get(STELLA_LITRO), 80, 0);
-        Assert.assertEquals( bebidas.get(STELLA_PORRON), 40, 0);
-        Assert.assertEquals( bebidas.get(COCA_COLA), 45, 0);
-        Assert.assertEquals( bebidas.get(AGUA_SIN_GAS), 30, 0);
+        Assert.assertTrue( bebidas.contains(STELLA_LITRO) );
+        Assert.assertTrue( bebidas.contains(STELLA_PORRON) );
+        Assert.assertTrue( bebidas.contains(COCA_COLA) );
+        Assert.assertTrue( bebidas.contains(AGUA_SIN_GAS) );
     }
 }
