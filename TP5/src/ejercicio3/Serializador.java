@@ -2,7 +2,6 @@ package ejercicio3;
 
 import ejercicio1.EntidadSerializable;
 import ejercicio2.AtributoSerializable;
-import restaurant.Conexion;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
@@ -90,6 +89,7 @@ public class Serializador {
 
                 f.setAccessible(true);
                 Object value = f.get(objeto);
+                params.add(value);
 
                 columns += nombreAmigable + ",";
                 values += "?,";
@@ -98,18 +98,28 @@ public class Serializador {
 
         // Remueve la ultima coma a las columnas del insert
         //if ( !columns.isEmpty() )
-        columns.substring(0, columns.length() - 1);
+        columns = columns.substring(0, columns.length() - 1);
 
         // Remueve la ultima coma a los valores que se van a insertar
         //if ( !values.isEmpty() )
-        values.substring(0, values.length() - 1);
+        values = values.substring(0, values.length() - 1);
 
-        String.format(sql, tipo.getName(), values, columns);
+        sql = String.format(sql, getClassName(tipo), columns, values);
 
-        write(sql, params);
+        crearTabla(tipo, con);
+
+        Conexion.write(sql, params, con);
+
+        //con.close();
     }
 
-    public void crearTabla(Class tipo) throws ClassNotFoundException, SQLException
+    private String getClassName(Class tipo) {
+        String[] nombre = tipo.getName().split("\\.");
+
+        return nombre[nombre.length - 1];
+    }
+
+    public void crearTabla(Class tipo, Connection con) throws ClassNotFoundException, SQLException
     {
         String columns = "";
 
@@ -119,6 +129,7 @@ public class Serializador {
 
             if ( atributoSerializable != null )
             {
+                // TODO: Crear un metodo que realice la condicion
                 if ( !f.getType().isPrimitive() && !f.getType().equals(String.class) ) throw new IllegalStateException();
 
                 columns += f.getName() + " ";
@@ -127,69 +138,38 @@ public class Serializador {
                 {
                     columns += "int,";
                 }
-                else if ( f.getType().equals(short.class) )
+                /*else if ( f.getType().equals(short.class) )
                 {
                     columns += "smallint,";
-                }
-                else if ( f.getType().equals(float.class) )
+                }*/
+                /*else if ( f.getType().equals(float.class) )
                 {
                     columns += "float,";
-                }
+                }*/
                 else if ( f.getType().equals(String.class) )
                 {
                     columns += "varchar(30),";
+                }
+                else if ( f.getType().equals(boolean.class) )
+                {
+                    columns += "bit,";
                 }
             }
         }
 
         // Remueve la ultima coma
         //if ( !columns.isEmpty() )
-        columns.substring(0, columns.length() - 1);
+        columns = columns.substring(0, columns.length() - 1);
 
-        String sql =
-                "IF OBJECT_ID(N'dbo.Customers', N'U') IS NOT NULL " +
-                "BEGIN " +
-                    "CREATE TABLE " + tipo.getName() + " ( " +
-                    columns + ")" +
-                "END";
+        //String sql ="CREATE TABLE " + getClassName(tipo) + " ( " +
+          //      columns + ")";
+          String sql =
+                  //"IF OBJECT_ID(N'" + getClassName(tipo) + "', N'U') IS NOT NULL " +
+                  //"BEGIN " +
+                      "CREATE TABLE IF NOT EXISTS " + getClassName(tipo) + " ( " +
+                      columns + ")";// +
+                  //"END";
 
-
-        write(sql, null);
-    }
-
-    public static void write (String sql, List<Object> params) throws ClassNotFoundException, SQLException {
-        cargarDriver();
-
-        Connection con = createConnection();
-
-        PreparedStatement statement = con.prepareStatement(sql);
-
-        if ( params != null )
-        {
-            int i = 1;
-
-            for (Object val : params) {
-                statement.setObject(i, val);
-            }
-        }
-
-        statement.close();
-        con.close();
-    }
-
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "sa";
-    private static final String DB_PASSWORD = "";
-
-    public static void cargarDriver() throws ClassNotFoundException {
-        Class.forName(DB_DRIVER);
-    }
-
-    public static Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DB_CONNECTION,
-                DB_USER,
-                DB_PASSWORD);
+        Conexion.write(sql, null, con);
     }
 }
