@@ -1,6 +1,9 @@
 package restaurant;
 
+import javax.print.DocFlavor;
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Conexion {
 
@@ -66,6 +69,38 @@ public class Conexion {
             statement.close();
             con.close();
         }
+    }
+
+    public static List<String> read(String sql, Object[] params) throws ClassNotFoundException, SQLException
+    {
+        List<String> values = new LinkedList<>();
+
+        cargarDriver();
+
+        Connection con = createConnection();
+
+        PreparedStatement statement = con.prepareStatement(sql);
+
+        if ( params != null )
+        {
+            for (int i = 0; i < params.length; i++)
+            {
+                set(statement, i + 1, params[i]);
+            }
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while ( resultSet.next() )
+        {
+            values.add( resultSet.getString(1) );
+        }
+
+        resultSet.close();
+        statement.close();
+        con.close();
+
+        return values;
     }
 
     /*
