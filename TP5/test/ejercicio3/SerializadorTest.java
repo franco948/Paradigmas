@@ -20,8 +20,8 @@ public class SerializadorTest {
     public void setUp() throws Exception {
     }
 
-    @AfterClass
-    public static void tearDown() throws Exception {
+
+    public void tearDown() throws Exception {
         String sql = "DROP TABLE Persona";
 
         Connection con = Conexion.createConnection();
@@ -102,5 +102,7 @@ public class SerializadorTest {
         Assert.assertEquals( p2.getApellido(), pRes.getApellido() );
         Assert.assertEquals( p2.getEdad(), pRes.getEdad() );
         Assert.assertEquals( p2.getSoltero(), pRes.getSoltero() );
+
+        tearDown();
     }
 }
