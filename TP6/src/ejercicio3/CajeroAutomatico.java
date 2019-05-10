@@ -21,7 +21,7 @@ public class CajeroAutomatico
 
     public float consultarSaldo(int numeroCuenta)
     {
-        return this.banco.obtenerCuenta(numeroCuenta).consultarSaldo(numeroCuenta);
+        return this.banco.obtenerCuenta(numeroCuenta).consultarSaldo();
     }
 
     public void cambiarPinHomeBanking(int numeroCuenta, int pin, int nuevoPin)
