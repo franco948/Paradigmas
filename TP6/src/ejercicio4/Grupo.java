@@ -9,23 +9,36 @@ public class Grupo
     private String nombre;
     private List<Contacto> contactos;
 
-    public Grupo()
+    public Grupo(String nombre)
     {
+        this.nombre = nombre;
         this.contactos = new LinkedList<>();
     }
 
-    public Collection<Contacto> getContactos()
+    public List<Contacto> getContactos()
     {
         return contactos;
     }
 
     public void agregar(Contacto contacto)
     {
-        throw new UnsupportedOperationException();
+        contacto.attach(this);
+
+        contactos.add(contacto);
     }
 
     public void remover(Contacto contacto)
     {
-        throw new UnsupportedOperationException();
+        contactos.remove(contacto);
+    }
+
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
     }
 }

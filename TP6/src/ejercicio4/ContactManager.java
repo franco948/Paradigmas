@@ -15,38 +15,52 @@ public class ContactManager
         this.grupos = new LinkedList<>();
     }
 
-    public Collection<Contacto> getContactos()
+    public List<Contacto> getContactos()
     {
         return contactos;
     }
 
-    public Collection<Grupo> getGrupos()
+    public List<Grupo> getGrupos()
     {
         return grupos;
     }
 
     public void agregarContacto(Contacto contacto)
     {
-        throw new UnsupportedOperationException();
+        contactos.add(contacto);
     }
 
     public void borrarContacto(Contacto contacto)
     {
-        throw new UnsupportedOperationException();
+        // TODO: verificar que exista y sino lanzar error
+
+        for (Contacto c : contactos)
+        {
+            if ( contacto.equals(c) )
+            {
+                c.eliminar();
+            }
+        }
+
+        contactos.remove(contacto);
     }
 
     public void modificarEmail(Contacto contacto, String email)
     {
-        throw new UnsupportedOperationException();
+        if ( !contactos.contains(contacto) ) throw new IllegalStateException();
+
+        contacto.setEmail(email);
     }
 
     public void crearGrupo(Grupo grupo)
     {
-        throw new UnsupportedOperationException();
+        grupos.add(grupo);
     }
 
     public void modificarGrupo(Grupo grupo, String nombre)
     {
-        throw new UnsupportedOperationException();
+        if ( !grupos.contains(grupo) ) throw new IllegalStateException();
+
+        grupo.setNombre(nombre);
     }
 }
