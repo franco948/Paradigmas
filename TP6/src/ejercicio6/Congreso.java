@@ -50,12 +50,16 @@ public class Congreso {
         this.asistentes.add(asistente);
     }
 
-    public void imprimirAsistentes()
+    public String imprimirAsistentes()
     {
+        String listaAsistentes = "";
+
         for (Asistente asistente: asistentes) {
             String nombreYApellido = asistente.getNombre() + " " + asistente.getApellido();
-            System.out.println(nombreYApellido);
+            listaAsistentes += nombreYApellido + "\n";
         }
+
+        return listaAsistentes;
     }
 
     public float precioACobrar(Asistente asistente)
@@ -70,6 +74,10 @@ public class Congreso {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public List<Asistente> getAsistentes() {
+        return asistentes;
     }
 }
 

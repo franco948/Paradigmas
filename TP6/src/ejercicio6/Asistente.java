@@ -24,11 +24,13 @@ public abstract class Asistente
 
     public abstract float descuento();
 
-    public void imprimirCredencial()
+    public String imprimirCredencial()
     {
-        System.out.println("Congreso: " + congreso.getNombre());
-        System.out.println("Nombre y Apellido: " + getNombre() + " " + getApellido());
-        System.out.println("Instituto: " + getInstituto());
+        String credencial = "";
+        credencial += "Congreso: " + congreso.getNombre() + "\n";
+        credencial += "Nombre y Apellido: " + getNombre() + " " + getApellido() + "\n";
+        credencial += "Instituto: " + getInstituto() + "\n";
+        return credencial;
     }
 
     public void setCongreso(Congreso congreso) {
