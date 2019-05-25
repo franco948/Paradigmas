@@ -7,11 +7,11 @@ public class Cuenta
     private Cliente cliente;
     private int pin;
 
-    public Cuenta(int numeroCuenta, float saldo, Cliente cliente, int pin)
+    public Cuenta(int numeroCuenta, float saldo, int pin)
     {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
-        this.cliente = cliente;
+        //this.cliente = cliente;
         this.pin = pin;
     }
 
@@ -51,6 +51,11 @@ public class Cuenta
         return saldo;
     }
 
+    public int getPin()
+    {
+        return pin;
+    }
+
     public void cambiarPinHomeBanking(int pin, int nuevoPin)
     {
         if (this.pin == pin)
@@ -61,5 +66,9 @@ public class Cuenta
         {
             throw new IllegalStateException();
         }
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
