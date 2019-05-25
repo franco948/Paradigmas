@@ -22,16 +22,6 @@ public class JuegoDeLaSilla
         jugadores.add(new Jugador("Mariana"));
 
         new JuegoDeLaSilla(1).jugar(jugadores);
-
-
-        jugadores = new LinkedList<>();
-        jugadores.add(new Jugador("Dario"));
-        jugadores.add(new Jugador("Hernan"));
-        jugadores.add(new Jugador("Alejandro"));
-        jugadores.add(new Jugador("Julian"));
-        jugadores.add(new Jugador("Mariana"));
-
-        new JuegoDeLaSilla(1).jugar(jugadores);
     }
 
     public JuegoDeLaSilla(int tiempoMaximoPorRonda)
@@ -52,7 +42,8 @@ public class JuegoDeLaSilla
         }
     }
 
-    public void jugar(List<Jugador> jugadores) throws InterruptedException
+    // devuelve el ganador
+    public Jugador jugar(List<Jugador> jugadores) throws InterruptedException
     {
         // no se puede jugar con menos de dos jugadores
         if (jugadores.size() < 2) throw new IllegalStateException();
@@ -66,15 +57,19 @@ public class JuegoDeLaSilla
 
             int segundos = new Random().nextInt( (max - min) +1 ) + min;
 
-            Thread.sleep(segundos * 1000);
+            // comentar para pruebas y descomentar en produccion
+            //Thread.sleep(segundos * 1000);
 
             Jugador perdedor = nuevaVuelta();
 
-            imprimir(++ronda, segundos, perdedor);
+            System.out.println(imprimir(++ronda, segundos, perdedor));
 
         }
 
-        System.out.println("El ganador es " + jugadores.get(0).getNombre() + "!!!!");
+        Jugador ganador = jugadores.get(0);
+
+        System.out.println("El ganador es " + ganador.getNombre() + "!!!!");
+        return ganador;
     }
 
     // devuelve el jugador que perdio
@@ -105,11 +100,12 @@ public class JuegoDeLaSilla
         return perdedor;
     }
 
-    public void imprimir(int ronda, int segundos, Jugador jugador)
+    public String imprimir(int ronda, int segundos, Jugador jugador)
     {
-        System.out.println("Ronda " + ronda +
+
+        return "Ronda " + ronda +
                 ": La música sonó "+segundos
                 +" segundos y cuando paró la música perdió " +
-                "\""+jugador.getNombre()+"\"");
+                "\""+jugador.getNombre()+"\"";
     }
 }
