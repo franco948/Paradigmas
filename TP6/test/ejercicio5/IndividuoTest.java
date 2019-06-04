@@ -29,7 +29,7 @@ public class IndividuoTest
         int expectedSize = 25000;
 
         // ACT
-        List<Gen> genesIguales = individuo.genesIguales(individuo);
+        List<GenValuado> genesIguales = individuo.genesIguales(individuo);
 
         // ASSERT
         Assert.assertEquals(expectedSize, genesIguales.size());

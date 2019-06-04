@@ -5,7 +5,6 @@ public class Gen
     // TODO: usar fly weight
     private int id;
     private int cantidadNucleotidos;
-    private Nucleotido[] nucleotidos;
 
     public Gen(int id, int cantidadNucleotidos)
     {
@@ -13,36 +12,24 @@ public class Gen
         this.cantidadNucleotidos = cantidadNucleotidos;
     }
 
-    public Gen clonar()
+    public int getId() {
+        return id;
+    }
+
+    public int getCantidadNucleotidos() {
+        return cantidadNucleotidos;
+    }
+
+   /* public Gen clonar()
     {
-        Gen gen = new Gen(id, cantidadNucleotidos);
+        Gen gen = new GenValuado(id, cantidadNucleotidos);
         gen.nucleotidos = new Nucleotido[cantidadNucleotidos];
         return gen;
-    }
+    }*/
 
-    public Nucleotido[] getNucleotidos()
+/*    public Nucleotido[] getNucleotidos()
     {
         return nucleotidos;
-    }
+    }*/
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (o == null) return false;
-
-        if ( o.getClass() != this.getClass() ) return false;
-
-        Gen gen = (Gen)o;
-
-        if (this.id != gen.id) return false;
-
-        if (this.cantidadNucleotidos != ((Gen) o).cantidadNucleotidos) return false;
-
-        for (int i = 0; i < cantidadNucleotidos; i++)
-        {
-            if ( nucleotidos[i] != gen.nucleotidos[i] ) return false;
-        }
-
-        return true;
-    }
 }

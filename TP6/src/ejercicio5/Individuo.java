@@ -5,18 +5,18 @@ import java.util.List;
 
 public class Individuo
 {
-    private Gen[] genes;
+    private GenValuado[] genes;
 
     public Individuo()
     {
         int i = 0;
         int cantidadGenes = GenomaHumano.instancia().cantidadGenes();
         
-        genes = new Gen[cantidadGenes];
+        genes = new GenValuado[cantidadGenes];
 
         for (Gen g : GenomaHumano.instancia().genes())
         {
-            Gen gen = g.clonar();
+            GenValuado gen = new GenValuado(g);
 
             Nucleotido[] nucleotidos = gen.getNucleotidos();
 
@@ -29,9 +29,9 @@ public class Individuo
         }
     }
 
-    public List<Gen> genesIguales(Individuo otroIndividuo)
+    public List<GenValuado> genesIguales(Individuo otroIndividuo)
     {
-        List<Gen> genesIguales = new LinkedList<>();
+        List<GenValuado> genesIguales = new LinkedList<>();
 
         for (int i = 0; i < genes.length; i++)
         {
