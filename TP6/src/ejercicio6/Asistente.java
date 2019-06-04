@@ -24,6 +24,16 @@ public abstract class Asistente
 
     public abstract float descuento();
 
+    public float calcularPrecio(float precioBase)
+    {
+        float precio = precioBase;
+
+        // todo descontar al inicio o al final?
+        precio -= precio * descuento();
+        precio += new HotelServices().precioDesayuno();
+        return precio;
+    }
+
     public String imprimirCredencial()
     {
         String credencial = "";

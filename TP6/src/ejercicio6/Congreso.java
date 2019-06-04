@@ -64,12 +64,7 @@ public class Congreso {
 
     public float precioACobrar(Asistente asistente)
     {
-        float precio = precioBase;
-
-        // todo descontar al inicio o al final?
-        precio -= precio * asistente.descuento();
-        precio += new HotelServices().precioDesayuno();
-        return precio;
+        return asistente.calcularPrecio(precioBase);
     }
 
     public String getNombre() {
