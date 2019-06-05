@@ -5,17 +5,17 @@ import java.util.Random;
 
 public class Silla
 {
-    private Jugador jugador;
+    /*private Jugador jugador;
 
     public Silla()
     {
         this.jugador = null;
     }
-
+*/
     /*public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }*/
-
+/*
     public void removerJugador()
     {
         this.jugador = null;
@@ -54,5 +54,5 @@ public class Silla
     public boolean ocupada()
     {
         return jugador != null;
-    }
+    }*/
 }

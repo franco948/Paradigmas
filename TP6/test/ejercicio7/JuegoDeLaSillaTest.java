@@ -27,10 +27,10 @@ public class JuegoDeLaSillaTest {
         jugadores.add(new Jugador("Julian"));
         jugadores.add(new Jugador("Mariana"));
 
-        JuegoDeLaSilla juegoDeLaSilla = new JuegoDeLaSilla(1);
+        JuegoDeLaSilla juegoDeLaSilla = new JuegoDeLaSilla(jugadores,1);
 
         // ACT
-        Jugador ganadorResultado = juegoDeLaSilla.jugar(jugadores);
+        Jugador ganadorResultado = juegoDeLaSilla.jugar();
 
         // ASSERT
         Assert.assertTrue( jugadores.size() == 1 );
@@ -44,13 +44,44 @@ public class JuegoDeLaSillaTest {
         List<Jugador> jugadores = new LinkedList<>();
         jugadores.add(new Jugador("Dario"));
 
-        JuegoDeLaSilla juegoDeLaSilla = new JuegoDeLaSilla(1);
+        JuegoDeLaSilla juegoDeLaSilla = new JuegoDeLaSilla(jugadores,1);
 
 
         // ACT
-        juegoDeLaSilla.jugar(jugadores);
+        juegoDeLaSilla.jugar();
+    }
+
+    @Test
+    public void jugar_GeneraHistorial_Ok()
+    {
+        // ARRANGE
+        int maxTiempoPorRonda = 60;
+
+        List<Jugador> jugadores = new LinkedList<>();
+        jugadores.add(new Jugador("Dario"));
+        jugadores.add(new Jugador("Hernan"));
+        jugadores.add(new Jugador("Alejandro"));
+        jugadores.add(new Jugador("Julian"));
+        jugadores.add(new Jugador("Mariana"));
+
+        JuegoDeLaSilla juegoDeLaSilla = new JuegoDeLaSilla(jugadores,maxTiempoPorRonda);
+
+        // ACT
+        Jugador ganador = juegoDeLaSilla.jugar();
+
+        // ASSERT
+        Assert.assertEquals(4,juegoDeLaSilla.getRondas().size());
+
+        for (Ronda r : juegoDeLaSilla.getRondas()) {
+            // El ganador esta en todas las rondas
+            Assert.assertTrue( r.getHistorial().containsValue(ganador) );
+            // el minimo de duracion debe ser de 1 segundo (una ronda no puede durar 0 segundos o menos
+            Assert.assertTrue( r.getDuracion() >= 1 );
+            Assert.assertTrue(r.getDuracion() <= maxTiempoPorRonda);
+        }
     }
 /*
+
     @Test
     public void nuevaVuelta() throws Exception {
         // ARRANGE
@@ -72,10 +103,11 @@ public class JuegoDeLaSillaTest {
         Assert.assertFalse( jugadores.contains(perdedorResultado) );
     }*/
 
+/*
     @Test
     public void imprimir() {
     }
-
+*/
     @After
     public void tearDown() throws Exception {
     }

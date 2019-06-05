@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class JuegoDeLaSilla
 {
-    private int ronda = 0;
-    private int max = 1;
-    private int min = 1;
+    private int max;
     private List<Jugador> jugadores;
     private List<Silla> sillas;
+    private List<Ronda> rondas = new LinkedList<>();
+    private Jugador ganador;
 
     public static void main(String[] args) throws InterruptedException
     {
@@ -21,14 +21,37 @@ public class JuegoDeLaSilla
         jugadores.add(new Jugador("Julian"));
         jugadores.add(new Jugador("Mariana"));
 
-        new JuegoDeLaSilla(1).jugar(jugadores);
+        JuegoDeLaSilla s = new JuegoDeLaSilla(jugadores,1);
+        s.jugar();
+
+        s.imprimir();
     }
 
-    public JuegoDeLaSilla(int tiempoMaximoPorRonda)
+    public JuegoDeLaSilla(List<Jugador> jugadores,int tiempoMaximoPorRonda)
     {
+        this.jugadores = jugadores;
+        inicializarSillas();
         // cuando tiempo < 1 lanza error
         this.max = tiempoMaximoPorRonda;
+    }
 
+    // devuelve el ganador
+    public Jugador jugar()
+    {
+        if (jugadores.size() < 2) throw new IllegalStateException();
+
+        int numeroRonda = 1;
+
+        while (jugadores.size() > 1)
+        {
+            Ronda r = new Ronda(numeroRonda++, sillas,jugadores, max);
+            rondas.add(r);
+            r.imprimir();
+        }
+
+        ganador = jugadores.get(0);
+
+        return ganador;
     }
 
     private void inicializarSillas()
@@ -42,70 +65,17 @@ public class JuegoDeLaSilla
         }
     }
 
-    // devuelve el ganador
-    public Jugador jugar(List<Jugador> jugadores) throws InterruptedException
+    public void imprimir()
     {
-        // no se puede jugar con menos de dos jugadores
-        if (jugadores.size() < 2) throw new IllegalStateException();
-
-        this.jugadores = jugadores;
-
-        inicializarSillas();
-
-        while(jugadores.size() > 1)
-        {
-
-            int segundos = new Random().nextInt( (max - min) +1 ) + min;
-
-            // comentar para pruebas y descomentar en produccion
-            //Thread.sleep(segundos * 1000);
-
-            Jugador perdedor = nuevaVuelta();
-
-            System.out.println(imprimir(++ronda, segundos, perdedor));
-
+        for (Ronda r : rondas) {
+            System.out.println(r.imprimir());
         }
 
-        Jugador ganador = jugadores.get(0);
-
-        System.out.println("El ganador es " + ganador.getNombre() + "!!!!");
-        return ganador;
+        System.out.println("El ganador fue " + ganador.getNombre() + ". Felicidades!!!");
     }
 
-    // devuelve el jugador que perdio
-    public Jugador nuevaVuelta()
+    public List<Ronda> getRondas()
     {
-        for (Silla silla : sillas) {
-            silla.sentarJugador(jugadores);
-        }
-
-        Jugador perdedor = null;
-
-        for (Jugador jugador :jugadores) {
-            if (!jugador.sentado())
-            {
-
-                perdedor = jugador;
-            }
-            else{
-                jugador.levantarse();
-            }
-        }
-
-        jugadores.remove(perdedor);
-
-        // quitar silla
-        Silla ultimaSilla = sillas.get(sillas.size() - 1);
-        sillas.remove(ultimaSilla);
-        return perdedor;
-    }
-
-    public String imprimir(int ronda, int segundos, Jugador jugador)
-    {
-
-        return "Ronda " + ronda +
-                ": La música sonó "+segundos
-                +" segundos y cuando paró la música perdió " +
-                "\""+jugador.getNombre()+"\"";
+        return rondas;
     }
 }
