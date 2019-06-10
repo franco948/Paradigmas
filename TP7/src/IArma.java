@@ -1,5 +1,5 @@
 public interface IArma extends IEntity {
-    void disparar(Soldado soldado);
+    void disparar(ISoldado soldado);
     //ISoldado getSoldado();
     String getNombre();
     void setNombre(String nombre);

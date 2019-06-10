@@ -6,7 +6,7 @@ public class NullArma extends Entity implements IArma {
     }
 
     @Override
-    public void disparar(Soldado soldado) {
+    public void disparar(ISoldado soldado) {
         // No implementado
     }
 

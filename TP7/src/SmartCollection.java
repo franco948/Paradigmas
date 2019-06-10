@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class SmartCollection<T extends Entity> implements ICollection<T> {
+public class SmartCollection<T extends IEntity> implements ICollection<T> {
 
     private IMapper<T> mapper;
     // Todo cambiar a SET?

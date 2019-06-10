@@ -12,7 +12,7 @@ public class Arma extends Entity implements IArma {
     }
 
     @Override
-    public void disparar(Soldado soldado) {
+    public void disparar(ISoldado soldado) {
         System.out.println("Disparando");
     }
 

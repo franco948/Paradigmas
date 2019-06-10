@@ -13,7 +13,7 @@ public class Main {
 
         SoldadoMapper soldadoMapper = new SoldadoMapper();
 
-        ICollection<Soldado> soldados = soldadoMapper.all(1);
+        ICollection<ISoldado> soldados = soldadoMapper.all(1);
         soldados.get(3);
         soldados.get(3);
         //soldados.get(4); // deberia tirar error
@@ -26,8 +26,8 @@ public class Main {
 
         soldados.get(4);
 
-        Soldado s1 =soldados.get(1);
-        Soldado s2 =soldados.get(2);
+        ISoldado s1 =soldados.get(1);
+        ISoldado s2 =soldados.get(2);
 
         s1.getArma().disparar(s2);
         s1.setArma(new ArmaMapper().find(s1.getArma()));

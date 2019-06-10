@@ -1,11 +1,11 @@
 import java.sql.*;
 
-public class SoldadoMapper implements IMapper<Soldado> {
+public class SoldadoMapper implements IMapper<ISoldado> {
 
     private int limit = 2;
 
     @Override
-    public void insert(Soldado entity) {
+    public void insert(ISoldado entity) {
         try {
             String sql =
                     "INSERT INTO Soldado (nombre,apellido,edad,arma_id)" +
@@ -35,7 +35,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
     }
 
     @Override
-    public void delete(Soldado entity) {
+    public void delete(ISoldado entity) {
         String sql = "DELETE FROM Soldado WHERE Id = ?";
 
         try {
@@ -58,7 +58,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
     }
 
     @Override
-    public void update(Soldado entity) {
+    public void update(ISoldado entity) {
         String sql =
                 "UPDATE Soldado SET "+
                 "nombre = ?, apellido = ?, edad = ?, arma_id = ? " +
@@ -84,7 +84,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
     }
 
     @Override
-    public Soldado find(Soldado entity) {
+    public Soldado find(ISoldado entity) {
 
         String sql = "SELECT * FROM Soldado WHERE id = ?";
 
@@ -114,12 +114,12 @@ public class SoldadoMapper implements IMapper<Soldado> {
     }
 
     @Override
-    public ICollection<Soldado> all() {
+    public ICollection<ISoldado> all() {
 
         String sql =
                 "SELECT * FROM Soldado ORDER BY id";
 
-        SmartCollection<Soldado> col = new SmartCollection<>(this);
+        SmartCollection<ISoldado> col = new SmartCollection<>(this);
 
         mapAll(sql, col);
 
@@ -128,7 +128,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
 
 
     @Override
-    public ICollection<Soldado> all(int page) {
+    public ICollection<ISoldado> all(int page) {
 
         if(page < 1) throw new IllegalStateException();
 
@@ -138,7 +138,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
                 "SELECT * FROM Soldado ORDER BY id " +
                 "LIMIT "+ limit +" OFFSET " + offset;
 
-        SmartCollection<Soldado> col = new SmartCollection<>(this);
+        SmartCollection<ISoldado> col = new SmartCollection<>(this);
 
         mapAll(sql, col);
 
@@ -158,7 +158,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
         return soldado;
     }
 
-    private void mapAll(String sql, ICollection<Soldado> collection)
+    private void mapAll(String sql, ICollection<ISoldado> collection)
     {
         try {
             Connection con = Conexion.createConnection();
@@ -181,7 +181,7 @@ public class SoldadoMapper implements IMapper<Soldado> {
         }
     }
 
-    private void setPreparedStatement(PreparedStatement statement, Soldado entity ) throws SQLException
+    private void setPreparedStatement(PreparedStatement statement, ISoldado entity ) throws SQLException
     {
         statement.setString(1,entity.getNombre());
         statement.setString(2,entity.getApellido());
